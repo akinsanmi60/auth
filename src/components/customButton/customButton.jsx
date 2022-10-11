@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 import React from "react";
 
 const customButton = ({ onPress, text, type = 'PRIMARY', bgColor, fgColor }) => {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: '100%',
 
     padding: 15,
-    marginVertical: 5,
+    marginVertical: 6,
 
     alignItems: 'center',
     borderRadius: 5,
