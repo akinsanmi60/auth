@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React  from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";
 import SocialBtn from "../../components/sociaButtons/socialBtn";
 import { useNavigation } from '@react-navigation/core';
+import { useForm } from 'react-hook-form';
+
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 
 const SignUpScreen = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
-
+  const { control, handleSubmit, watch } = useForm({defaultValues: {
+    fullName: '',
+    username:"",
+    email: '',
+    password: '',
+    confirmPassword: ''
+  }});
+  const pwdValidate = watch('password');
   const navigation = useNavigation();
 
 
@@ -42,29 +49,69 @@ const SignUpScreen = () => {
         </Text>
 
         <CustomInput
+          placeholder="Full Name"
+          name="fullName"
+          control={control}
+          rules={{
+            required: "Full name is reqired",
+          }}
+        />
+
+        <CustomInput
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
+          name="username"
+          control={control}
+          rules={{
+            required: "Username is reqired",
+            minLength: {
+              value: 3,
+              message: 'Username should be at least 3 characters long',
+            },
+            maxLength: {
+              value: 24,
+              message: 'Username should be max 24 characters long',
+            },
+          }}
+
         />
 
         <CustomInput
           placeholder="Email"
-          value={email}
-          setValue={setEmail}
+          name="email"
+          control={control}
+          rules={{
+            required: "Email is reqired",
+            pattern: { value: EMAIL_REGEX, message: 'Email is invalid' },
+          }}
         />
 
         <CustomInput
           placeholder="Password"
-          value={password}
-          setValue={setPassword} secureTextEntry
+          name="password"
+          control={control}
+          secureTextEntry
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 8,
+              message: 'Password should be at least 8 characters long',
+            },
+          }}
         />
         <CustomInput
+          control={control}
           placeholder="Confirm Password"
-          value={passwordRepeat}
-          setValue={setPasswordRepeat} secureTextEntry
+          name="confirmPassword"
+          secureTextEntry
+          rules={{
+            validate: value => value === pwdValidate || "Password do not match",
+          }}
         />
 
-        <CustomButton text="Register" onPress={onRegisterPressed} />
+        <CustomButton
+          text="Register"
+          onPress={handleSubmit(onRegisterPressed)}
+        />
 
         <Text style={styles.text}>
           By registering, you confirm that you accept our{" "}

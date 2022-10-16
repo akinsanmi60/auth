@@ -1,22 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView } from "react-native";
 import Logo from "../../../assets/images/World-Map.png";
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";
 import SocialBtn from "../../components/sociaButtons/socialBtn";
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from "react-hook-form";
 
+
+
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const Signscreen = () => {
   const { height } = useWindowDimensions();
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const { control, handleSubmit } = useForm({defaultValues: {
+    email: '',
+    password: ''
+  }})
 
   const navigation = useNavigation();
 
   const SigInPress = () => {
     navigation.navigate('Home')
-    console.warn("Working")
   }
 
   const ForgotPress = () => {
@@ -35,10 +41,36 @@ const Signscreen = () => {
           style={[styles.logo, { height: height * 0.3 }]}
           resizeMode="contain"
         />
-        <CustomInput placeholder="Username" value={username} setValue={setUsername} />
-        <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry />
 
-        <CustomButton text="Log In" onPress={SigInPress} />
+        <CustomInput
+          placeholder="Email"
+          name="email"
+          control={control}
+          rules={{
+            required: "Email is reqired",
+            pattern: { value: EMAIL_REGEX, message: 'Email is invalid' },
+
+          }}
+        />
+
+        <CustomInput
+          placeholder="Password"
+          name="password"
+          control={control}
+          secureTextEntry
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 8,
+              message: 'Password should be at least 8 characters long',
+            },
+          }}
+        />
+
+        <CustomButton
+          text="Log In"
+          onPress={handleSubmit(SigInPress)}
+        />
 
         <CustomButton
           text="Forgot Password"

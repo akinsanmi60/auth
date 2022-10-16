@@ -3,11 +3,20 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";
 import {useNavigation} from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
+
+
+
 
 const NewPasswordScreen = () => {
-  const [code, setCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      code: "",
+      newPassword: "",
+      confirmPassword: ""
+    }
+  })
+  const pwdValidate = watch('newPassword');
   const navigation = useNavigation();
 
   const onSubmitPressed = () => {
@@ -23,12 +32,45 @@ const NewPasswordScreen = () => {
       <View style={styles.root}>
         <Text style={styles.title}>Reset your password</Text>
 
-        <CustomInput placeholder="Code" value={code} setValue={setCode} />
+        <CustomInput
+          placeholder="Code"
+           name="code"
+          control={control}
+          rules={{
+            required: "Code is reqired",
+             minLength: {
+              value: 5,
+              message: 'code is 5 character',
+            },
+            maxLength: {
+              value: 5,
+              message: 'code is 5 character long',
+            },
+          }}
+         />
 
         <CustomInput
-          placeholder="Enter your new password"
-          value={newPassword}
-          setValue={setNewPassword}
+          placeholder="New Password"
+          name="newPassword"
+          control={control}
+          secureTextEntry
+          rules={{
+            required: 'New Password is required',
+            minLength: {
+              value: 8,
+              message: 'New Password should be at least 8 characters long',
+            },
+          }}
+        />
+
+         <CustomInput
+          control={control}
+          placeholder="Confirm Password"
+          name="confirmPassword"
+          secureTextEntry
+          rules={{
+            validate: value => value === pwdValidate || "Password do not match",
+          }}
         />
 
         <CustomButton text="Submit" onPress={onSubmitPressed} />

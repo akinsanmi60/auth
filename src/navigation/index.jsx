@@ -17,8 +17,8 @@ const NavigationIndex = () => {
   return (
       <NavigationContainer >
           <Stack.Navigator screenOptions={{headerShown: false}}>
-              <Stack.Screen name='Register' component={SignUpScreen}/>
               <Stack.Screen name='Login' component={Signscreen}/>
+              <Stack.Screen name='Register' component={SignUpScreen}/>
               <Stack.Screen name='ConfirmEmail' component={ConfirmEmailScreen}/>
               <Stack.Screen name='ForgotPassword' component={ForgotPasswordScreen}/>
               <Stack.Screen name='NewPassword' component={NewPasswordScreen}/>
