@@ -1,30 +1,27 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import React, {useState} from "react";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";
-import {useNavigation} from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
-
-
-
+import {useNavigation} from "@react-navigation/native";
+import {useForm} from "react-hook-form";
 
 const NewPasswordScreen = () => {
-  const { control, handleSubmit } = useForm({
+  const {control, handleSubmit, watch} = useForm({
     defaultValues: {
       code: "",
       newPassword: "",
-      confirmPassword: ""
-    }
-  })
-  const pwdValidate = watch('newPassword');
+      confirmPassword: "",
+    },
+  });
+  const pwdValidate = watch("newPassword");
   const navigation = useNavigation();
 
   const onSubmitPressed = () => {
-    navigation.navigate('Home');
+    navigation.navigate("Home");
   };
 
   const onSignInPress = () => {
-    navigation.navigate('Login');
+    navigation.navigate("Login");
   };
 
   return (
@@ -34,20 +31,16 @@ const NewPasswordScreen = () => {
 
         <CustomInput
           placeholder="Code"
-           name="code"
+          name="code"
           control={control}
           rules={{
             required: "Code is reqired",
-             minLength: {
-              value: 5,
-              message: 'code is 5 character',
-            },
             maxLength: {
               value: 5,
-              message: 'code is 5 character long',
+              message: "code is 5 character long",
             },
           }}
-         />
+        />
 
         <CustomInput
           placeholder="New Password"
@@ -55,15 +48,15 @@ const NewPasswordScreen = () => {
           control={control}
           secureTextEntry
           rules={{
-            required: 'New Password is required',
+            required: "New Password is required",
             minLength: {
               value: 8,
-              message: 'New Password should be at least 8 characters long',
+              message: "New Password should be at least 8 characters long",
             },
           }}
         />
 
-         <CustomInput
+        <CustomInput
           control={control}
           placeholder="Confirm Password"
           name="confirmPassword"
@@ -73,7 +66,7 @@ const NewPasswordScreen = () => {
           }}
         />
 
-        <CustomButton text="Submit" onPress={onSubmitPressed} />
+        <CustomButton text="Submit" onPress={handleSubmit(onSubmitPressed)} />
 
         <CustomButton
           text="Back to Sign in"
@@ -87,21 +80,21 @@ const NewPasswordScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
+    fontWeight: "bold",
+    color: "#051C60",
     margin: 10,
   },
   text: {
-    color: 'gray',
+    color: "gray",
     marginVertical: 10,
   },
   link: {
-    color: '#FDB075',
+    color: "#FDB075",
   },
 });
 

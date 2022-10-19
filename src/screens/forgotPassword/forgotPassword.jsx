@@ -1,31 +1,30 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {StyleSheet, Text, View, ScrollView} from "react-native";
 import React from "react";
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";
-import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
-
+import {useNavigation} from "@react-navigation/native";
+import {useForm} from "react-hook-form";
 
 const ForgotPasswordScreen = () => {
-  const { control, handleSubmit } = useForm({
+  const {control, handleSubmit} = useForm({
     defaultValues: {
-      username: ""
-    }
-  })
-  const navigation = useNavigation()
+      username: "",
+    },
+  });
+  const navigation = useNavigation();
 
   const onSendPressed = () => {
-    navigation.navigate('NewPassword');
+    navigation.navigate("NewPassword");
   };
 
   const onSignInPress = () => {
-    navigation.navigate('Login');
+    navigation.navigate("Login");
   };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-        <Text style={styles.title}>Reset your password</Text>
+        <Text style={styles.title}>Forgot your password</Text>
 
         <CustomInput
           placeholder="Username"
@@ -52,13 +51,13 @@ export default ForgotPasswordScreen;
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
+    fontWeight: "bold",
+    color: "#051C60",
     margin: 10,
   },
 });
