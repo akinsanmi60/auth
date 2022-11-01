@@ -1,1 +1,1 @@
-export {default} from "./confirmEmail"
+export {default} from "./confirmEmail";

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {View, Text, StyleSheet, ScrollView} from "react-native";
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";

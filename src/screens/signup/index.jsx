@@ -1,1 +1,1 @@
-export {default } from "./signupscreen"
+export {default} from "./signupscreen";

@@ -1,26 +1,26 @@
-import React  from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React from "react";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 import CustomInput from "../../components/customInput";
 import CustomButton from "../../components/customButton";
 import SocialBtn from "../../components/sociaButtons/socialBtn";
-import { useNavigation } from '@react-navigation/core';
-import { useForm } from 'react-hook-form';
+import {useNavigation} from "@react-navigation/core";
+import {useForm} from "react-hook-form";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-
 const SignUpScreen = () => {
-  const { control, handleSubmit, watch } = useForm({defaultValues: {
-    fullName: '',
-    username:"",
-    email: '',
-    password: '',
-    confirmPassword: ''
-  }});
-  const pwdValidate = watch('password');
+  const {control, handleSubmit, watch} = useForm({
+    defaultValues: {
+      fullName: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+  const pwdValidate = watch("password");
   const navigation = useNavigation();
-
 
   const onRegisterPressed = () => {
     navigation.navigate("ConfirmEmail");
@@ -41,12 +41,7 @@ const SignUpScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-
-        <Text
-          style={styles.title}
-        >
-          Create account
-        </Text>
+        <Text style={styles.title}>Create account</Text>
 
         <CustomInput
           placeholder="Full Name"
@@ -65,14 +60,13 @@ const SignUpScreen = () => {
             required: "Username is reqired",
             minLength: {
               value: 3,
-              message: 'Username should be at least 3 characters long',
+              message: "Username should be at least 3 characters long",
             },
             maxLength: {
               value: 24,
-              message: 'Username should be max 24 characters long',
+              message: "Username should be max 24 characters long",
             },
           }}
-
         />
 
         <CustomInput
@@ -81,7 +75,7 @@ const SignUpScreen = () => {
           control={control}
           rules={{
             required: "Email is reqired",
-            pattern: { value: EMAIL_REGEX, message: 'Email is invalid' },
+            pattern: {value: EMAIL_REGEX, message: "Email is invalid"},
           }}
         />
 
@@ -91,10 +85,10 @@ const SignUpScreen = () => {
           control={control}
           secureTextEntry
           rules={{
-            required: 'Password is required',
+            required: "Password is required",
             minLength: {
               value: 8,
-              message: 'Password should be at least 8 characters long',
+              message: "Password should be at least 8 characters long",
             },
           }}
         />
@@ -131,34 +125,31 @@ const SignUpScreen = () => {
           onPress={SignInPress}
           type="TERTIARY"
         />
-
       </View>
     </ScrollView>
   );
 };
 
-
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 20,
   },
 
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
+    fontWeight: "bold",
+    color: "#051C60",
     margin: 10,
   },
 
   text: {
-    color: 'gray',
+    color: "gray",
     marginVertical: 10,
   },
   link: {
-    color: '#FDB075',
+    color: "#FDB075",
   },
 });
-
 
 export default SignUpScreen;

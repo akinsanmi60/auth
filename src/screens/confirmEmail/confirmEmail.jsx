@@ -22,6 +22,7 @@ const ConfirmEmailScreen = () => {
   };
 
   const onResendPress = () => {
+    // eslint-disable-next-line no-undef
     console.warn("onResendPress");
   };
 

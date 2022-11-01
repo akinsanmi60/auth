@@ -1,51 +1,46 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import CustomButton from "../customButton";
 
-
 const SocialBtn = () => {
+  const onSignInFacebook = () => {
+    console.warn("onSignInFacebook");
+  };
 
+  const onSignInGoogle = () => {
+    console.warn("onSignInGoogle");
+  };
 
-    const onSignInFacebook = () => {
-        console.warn('onSignInFacebook');
-    };
+  const onSignInApple = () => {
+    console.warn("onSignInApple");
+  };
 
-    const onSignInGoogle = () => {
-        console.warn('onSignInGoogle');
-    };
+  return (
+    <>
+      <CustomButton
+        text="Sign In with Facebook"
+        onPress={onSignInFacebook}
+        bgColor="#E7EAF4"
+        fgColor="#4765A9"
+      />
 
-    const onSignInApple = () => {
-        console.warn('onSignInApple');
-    };
+      <CustomButton
+        text="Sign In with Google"
+        onPress={onSignInGoogle}
+        bgColor="#FAE9EA"
+        fgColor="#DD4D44"
+      />
 
-    return (
-        <>
-            <CustomButton
-                text="Sign In with Facebook"
-                onPress={onSignInFacebook}
-                bgColor="#E7EAF4"
-                fgColor="#4765A9" />
-
-            <CustomButton
-                text="Sign In with Google"
-                onPress={onSignInGoogle}
-                bgColor="#FAE9EA"
-                fgColor="#DD4D44"
-            />
-
-            <CustomButton
-                text="Sign In with Apple"
-                onPress={onSignInApple}
-                bgColor="#e3e3e3"
-                fgColor="#363636"
-            />
-        </>
-    );
+      <CustomButton
+        text="Sign In with Apple"
+        onPress={onSignInApple}
+        bgColor="#e3e3e3"
+        fgColor="#363636"
+      />
+    </>
+  );
 };
 
 const styles = StyleSheet.create({});
 
-
-
 export default SocialBtn;
-

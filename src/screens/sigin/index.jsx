@@ -1,1 +1,1 @@
-export {default } from "./signscreen"
+export {default} from "./signscreen";
